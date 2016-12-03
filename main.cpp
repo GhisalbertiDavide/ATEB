@@ -31,5 +31,5 @@ int main(int argc, char *argv[])
     gLog->log(__FILE__,"Ethernet v. "+QString(ETHERNET_VERSION));
 #endif
 
-    return a.exec();
+    return 0;
 }

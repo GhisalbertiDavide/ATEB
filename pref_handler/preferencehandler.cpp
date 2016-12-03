@@ -20,22 +20,17 @@ bool PreferenceHandler::load()
     if(!current_pref_file.isOpen())
         return false;
 
-    do
+    while(!(line=stream.readLine()).isNull())
     {
-        line = stream.readLine();
-
-        if(line.indexOf("[") == -1) //skip header
+        QStringList token = line.split("=");
+        if(token.count() == 2)
         {
-            QStringList token = line.split("=");
-            if(token.count() == 2)
-            {
-                pref_map.insert(token.at(0),token.at(1)); //insert preference as key-value
-                gLog->log(__FILE__,"Pref key "+token.at(0)+" -> "+token.at(1));
-            }
-            else
-                gLog->log(__FILE__,"Skipped property ["+line+"]: invalid format");
+            pref_map.insert(token.at(0),token.at(1)); //insert preference as key-value
+            gLog->log(__FILE__,"Pref key "+token.at(0)+" -> "+token.at(1));
         }
-    }while(!line.isNull());
+        else
+            gLog->log(__FILE__,"Skipped property ["+line+"]: invalid format");
+    }
 
     return true;
 }
