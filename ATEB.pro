@@ -17,3 +17,6 @@ HEADERS += \
     versions.h \
     logger/logger.h \
     pref_handler/preferencehandler.h
+
+DISTFILES += \
+    config_template/main.conf

@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <iostream>
 
-logger::logger(QObject *parent) : QObject(parent)
+Logger::Logger(QObject *parent) : QObject(parent)
 {
     logFile.setFileName("log");
     if(!logFile.open(QIODevice::WriteOnly))
@@ -12,11 +12,13 @@ logger::logger(QObject *parent) : QObject(parent)
         filestream.setDevice(&logFile);
 }
 
-void logger::log(QString origin,QString string)
+void Logger::log(QString origin,QString string)
 {
+    mutex.lock();
     QString log_string;
 
     log_string = "["+QDateTime::currentDateTime().toString("hh:mm:ss:zzz")+"] <"+origin+"> "+string;
     filestream<<log_string<<endl;
     std::cout<<log_string.toUtf8().data()<<std::endl;
+    mutex.unlock();
 }

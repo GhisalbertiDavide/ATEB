@@ -4,12 +4,13 @@
 #include <QObject>
 #include <QFile>
 #include <QTextStream>
+#include <QMutex>
 
-class logger : public QObject
+class Logger : public QObject
 {
     Q_OBJECT
 public:
-    explicit logger(QObject *parent = 0);
+    explicit Logger(QObject *parent = 0);
 
 signals:
 
@@ -23,6 +24,7 @@ public slots:
 private:
     QFile logFile;
     QTextStream filestream;
+    QMutex mutex;
 };
 
 #endif // LOGGER_H
