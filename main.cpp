@@ -1,7 +1,9 @@
 #include <QCoreApplication>
 #include <QString>
 #include <QDebug>
+
 #include "pref_handler/preferencehandler.h"
+#include "core/mainthread.h"
 #include "logger/logger.h"
 #include "versions.h"
 
@@ -11,6 +13,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     PreferenceHandler mPref(MAIN_CONFIG);
+    MainThread *mMain;
 
     //Start and read base preferences
     gLog->log(__FILE__,"Adding Telemetry EVADTS Box started");
@@ -31,5 +34,7 @@ int main(int argc, char *argv[])
     gLog->log(__FILE__,"Ethernet v. "+QString(ETHERNET_VERSION));
 #endif
 
-    return 0;
+    mMain = new MainThread();
+
+    return a.exec();
 }
