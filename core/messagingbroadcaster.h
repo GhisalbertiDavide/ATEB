@@ -10,8 +10,6 @@ class Message : public QObject
 {
     Q_OBJECT
 public:
-    explicit Message(QObject *parent = 0);
-
     int ID;
     QList<QVariant> payload;
 };

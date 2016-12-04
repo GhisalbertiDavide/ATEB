@@ -1,5 +1,6 @@
 #include "mainthread.h"
 #include "logger/logger.h"
+#include "versions.h"
 
 extern Logger *gLog;
 extern MessagingBroadcaster *gMessageBroadcaster;
@@ -22,5 +23,14 @@ void MainThread::proc()
     {
         this->thread()->sleep(1);
         gLog->log(__FILE__,"Thread running");
+        if(mMessagePool.count() != 0)
+        {
+            gLog->log(__FILE__,"Message received: "+itostr(mMessagePool.at(0)->ID));
+            foreach(QVariant var, mMessagePool.at(0)->payload)
+            {
+                gLog->log(__FILE__,"Payload: "+var.value<QString>());
+            }
+            mMessagePool.removeAt(0);
+        }
     }
 }

@@ -42,5 +42,13 @@ int main(int argc, char *argv[])
 
     mMain = new MainThread();
 
+    Message msg;
+    msg.ID = 1000;
+    msg.payload.append(QVariant(QString("Prova payload1")));
+    msg.payload.append(QVariant(QString("Prova payload2")));
+    msg.payload.append(QVariant(QString("Prova payload3")));
+    msg.payload.append(QVariant(QString("Prova payload4")));
+    gMessageBroadcaster->postMessage(MessagingBroadcaster::MainThread,&msg);
+
     return a.exec();
 }
