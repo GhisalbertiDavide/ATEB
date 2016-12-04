@@ -4,16 +4,22 @@
 
 #include "pref_handler/preferencehandler.h"
 #include "core/mainthread.h"
+#include "core/messagingbroadcaster.h"
 #include "logger/logger.h"
 #include "versions.h"
 
 Logger *gLog = new Logger(); //init logger handler
 
+
+MessagingBroadcaster *gMessageBroadcaster = new MessagingBroadcaster();
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+
     PreferenceHandler mPref(MAIN_CONFIG);
     MainThread *mMain;
+
 
     //Start and read base preferences
     gLog->log(__FILE__,"Adding Telemetry EVADTS Box started");

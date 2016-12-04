@@ -19,4 +19,8 @@
 #define ETHERNET_CONFIG "config/eth.conf"
 #endif
 
+
+/** Utility macros **/
+#define itostr(A) QString::number(A)
+
 #endif // VERSIONS_H

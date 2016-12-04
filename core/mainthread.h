@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QThread>
 
+#include "core/messagingbroadcaster.h"
+
 class MainThread : public QObject
 {
     Q_OBJECT
@@ -14,9 +16,9 @@ signals:
 
 public slots:
     void proc();
-
 private:
     QThread *mThread;
+    QList<Message *> mMessagePool;
 };
 
 #endif // MAINTHREAD_H
